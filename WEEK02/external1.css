@@ -1,0 +1,86 @@
+/* General body styling */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header styling */
+header {
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+/* Section styling */
+section {
+    padding: 20px;
+    margin: 10px;
+}
+
+/* Box styling with background */
+.box {
+    background-color: #e0e0e0;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+/* Highlight class for background */
+.highlight {
+    background-color: #ffeb3b;
+    font-weight: bold;
+}
+
+/* Table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* List styling */
+ul {
+    list-style-type: square;
+    padding-left: 20px;
+}
+
+/* CSS3 Pseudo-classes */
+a:hover {
+    color: red;
+}
+
+ul li:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+ul li:nth-child(even) {
+    background-color: #e2e2e2;
+}
+
+/* Pseudo-elements */
+p::first-letter {
+    font-size: 2em;
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+footer {
+    text-align: center;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+}

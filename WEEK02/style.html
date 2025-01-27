@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML and CSS Demo</title>
+  <style>
+    /* General styles for the body */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      color: #333;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Header styles */
+    header {
+      background-color: #4CAF50;
+      color: white;
+      padding: 15px;
+      text-align: center;
+    }
+
+    /* CSS for a table */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 20px 0;
+    }
+
+    table, th, td {
+      border: 1px solid #ddd;
+    }
+
+    th, td {
+      padding: 10px;
+      text-align: center;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    /* List styles */
+    ul {
+      list-style-type: square;
+      padding-left: 20px;
+    }
+
+    ol {
+      padding-left: 20px;
+    }
+
+    li {
+      margin-bottom: 8px;
+    }
+
+    /* CSS3 selector: hover effect for links */
+    a:hover {
+      color: #ff6347;
+    }
+
+    /* Pseudo-class for even rows */
+    tr:nth-child(even) {
+      background-color: #f2f2f2;
+    }
+
+    /* Pseudo-element for adding content before an element */
+    p::before {
+      content: "Note: ";
+      font-weight: bold;
+      color: #4CAF50;
+    }
+
+    /* Pseudo-element for adding content after an element */
+    p::after {
+      content: " (Important)";
+      font-style: italic;
+      color: red;
+    }
+
+    /* Special class for a highlighted section */
+    .highlight {
+      background-color: yellow;
+      font-weight: bold;
+    }
+
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>HTML and CSS Demo Page</h1>
+</header>
+
+<main>
+  <section>
+    <h2>Introduction to HTML & CSS</h2>
+    <p>Learn about basic HTML elements and CSS styling.</p>
+  </section>
+
+  <section>
+    <h2>Table Example</h2>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Age</th>
+        <th>City</th>
+      </tr>
+      <tr>
+        <td>John</td>
+        <td>28</td>
+        <td>New York</td>
+      </tr>
+      <tr>
+        <td>Jane</td>
+        <td>22</td>
+        <td>Los Angeles</td>
+      </tr>
+      <tr>
+        <td>Mary</td>
+        <td>30</td>
+        <td>Chicago</td>
+      </tr>
+    </table>
+  </section>
+
+  <section>
+    <h2>Lists Example</h2>
+    <h3>Unordered List</h3>
+    <ul>
+      <li>HTML</li>
+      <li>CSS</li>
+      <li>JavaScript</li>
+    </ul>
+
+    <h3>Ordered List</h3>
+    <ol>
+      <li>Step 1: Learn HTML</li>
+      <li>Step 2: Learn CSS</li>
+      <li>Step 3: Learn JavaScript</li>
+    </ol>
+  </section>
+
+  <section>
+    <h2>CSS3 Selectors</h2>
+    <p>Hover over the link to change its color:</p>
+    <a href="https://www.example.com">Visit Example.com</a>
+  </section>
+
+  <section>
+    <h2>CSS Pseudo-Classes and Pseudo-Elements</h2>
+    <p>Notice how the content is modified using <code>::before</code> and <code>::after</code>.</p>
+    <p class="highlight">This paragraph uses a special class.</p>
+  </section>
+</main>
+
+<footer>
+  <p>Created with love using HTML and CSS</p>
+</footer>
+
+</body>
+</html>
