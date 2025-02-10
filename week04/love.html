@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Love You</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffccd5;
+            text-align: center;
+            padding: 50px;
+        }
+
+        .loveMessage {
+            font-size: 50px;
+            color: #ff4d6d;
+            animation: loveAnim 1.5s infinite alternate;
+        }
+
+        .heart {
+            font-size: 70px;
+            color: #ff4d6d;
+            animation: heartAnim 1s infinite alternate;
+        }
+
+        @keyframes loveAnim {
+            0% { color: #ff4d6d; }
+            100% { color: #ff80a1; }
+        }
+
+        @keyframes heartAnim {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.5); }
+        }
+
+        .backButton {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            border-radius: 5px;
+            margin-top: 30px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="lovePage">
+        <div class="heart">💖</div>
+        <div class="loveMessage">I Love You!</div>
+        <button class="backButton" onclick="window.history.back();">Back to Proposal</button>
+    </div>
+
+</body>
+</html>

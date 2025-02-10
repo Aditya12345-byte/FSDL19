@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catch the Falling Objects Game</title>
+  <link rel="stylesheet" href="game.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Arial', sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background: linear-gradient(to bottom, #87CEEB, #1E90FF);
+      overflow: hidden;
+    }
+
+    #game-container {
+      width: 400px;
+      height: 600px;
+      background: #f0f0f0;
+      border: 2px solid #000;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #player {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      position: absolute;
+      bottom: 10px;
+      left: 175px;
+      border-radius: 10%;
+    }
+
+    .falling-object {
+      width: 30px;
+      height: 30px;
+      background-color: yellow;
+      position: absolute;
+      top: -30px;
+      border-radius: 50%;
+    }
+
+    #score-board {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <div id="game-container">
+    <div id="score-board">Score: 0</div>
+    <div id="player"></div>
+  </div>
+
+  <script>
+    const gameContainer = document.getElementById('game-container');
+    const player = document.getElementById('player');
+    const scoreBoard = document.getElementById('score-board');
+
+    let score = 0;
+    let gameWidth = gameContainer.offsetWidth;
+    let playerWidth = player.offsetWidth;
+    let playerPosition = (gameWidth - playerWidth) / 2;
+    player.style.left = `${playerPosition}px`;
+
+    // Move player with keyboard
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowLeft' && playerPosition > 0) {
+        playerPosition -= 20;
+      } else if (e.key === 'ArrowRight' && playerPosition < gameWidth - playerWidth) {
+        playerPosition += 20;
+      }
+      player.style.left = `${playerPosition}px`;
+    });
+
+    // Create falling objects
+    function createFallingObject() {
+      const object = document.createElement('div');
+      object.classList.add('falling-object');
+      object.style.left = `${Math.random() * (gameWidth - 30)}px`;
+      gameContainer.appendChild(object);
+
+      let objectTop = 0;
+      const objectFallInterval = setInterval(() => {
+        objectTop += 5;
+        object.style.top = `${objectTop}px`;
+
+        // Check for collision
+        if (
+          objectTop > gameContainer.offsetHeight - 60 &&
+          objectTop < gameContainer.offsetHeight &&
+          parseInt(object.style.left) >= playerPosition &&
+          parseInt(object.style.left) <= playerPosition + playerWidth
+        ) {
+          gameContainer.removeChild(object);
+          clearInterval(objectFallInterval);
+          score++;
+          scoreBoard.textContent = `Score: ${score}`;
+        }
+
+        // Remove object if it falls out of the game area
+        if (objectTop > gameContainer.offsetHeight) {
+          gameContainer.removeChild(object);
+          clearInterval(objectFallInterval);
+        }
+      }, 50);
+    }
+
+    // Spawn objects at intervals
+    setInterval(createFallingObject, 1000);
+  </script>
+</body>
+</html>

@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Valentine's Day Proposal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #ffccd5;
+            text-align: center;
+            padding: 50px;
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #ff4d6d;
+        }
+
+        p {
+            font-size: 20px;
+            color: #ff4d6d;
+        }
+
+        button {
+            background-color: #ff4d6d;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin: 20px;
+            border-radius: 5px;
+            position: absolute;
+        }
+
+        button:disabled {
+            background-color: #ffb3c1;
+        }
+
+        #message {
+            font-size: 18px;
+            color: #ff4d6d;
+            margin-top: 20px;
+        }
+
+        /* Ensure the buttons are placed next to each other */
+        #yesButton {
+            left: 20%;
+        }
+
+        #noButton {
+            left: 40%;
+        }
+    </style>
+</head>
+<body>
+
+    <div id="proposalContent"></div>
+    <div id="message"></div>
+
+    <script>
+        let noClickCount = 0; // Count how many times "No" is clicked
+        let maxNoClicks = 3; // After this many clicks, "No" will start moving
+        let noButtonMoving = false; // Track if we should allow the button to move
+        let noButton;
+
+        // Function to create the proposal and buttons
+        function createProposal() {
+            let proposalDiv = document.getElementById('proposalContent');
+
+            let question = document.createElement('h1');
+            question.textContent = "Will you be my Valentine?";
+            proposalDiv.appendChild(question);
+
+            let instruction = document.createElement('p');
+            instruction.textContent = "Click Yes to accept!";
+            proposalDiv.appendChild(instruction);
+
+            let yesButton = document.createElement('button');
+            yesButton.textContent = "Yes";
+            yesButton.id = "yesButton";
+            yesButton.onclick = handleYes;
+            proposalDiv.appendChild(yesButton);
+
+            noButton = document.createElement('button');
+            noButton.textContent = "No";
+            noButton.id = "noButton";
+            noButton.onclick = handleNo;
+            proposalDiv.appendChild(noButton);
+
+            // Initially, do not allow the "No" button to move, set event listeners for mouse hover
+            noButton.addEventListener('mouseenter', startMovingNoButton);
+            noButton.addEventListener('mouseleave', stopMovingNoButton);
+        }
+
+        // Function for handling the "Yes" click
+        function handleYes() {
+            window.location.href = 'love.html'; // Redirect to love.html
+        }
+
+        // Function for handling the "No" click
+        function handleNo() {
+            noClickCount++; // Increase the "No" click count
+
+            if (noClickCount <= maxNoClicks) {
+                // Show the convincing message for the first few clicks
+                document.getElementById('message').textContent = `Please, think again! Click Yes! (${maxNoClicks - noClickCount} attempts left)`;
+            } else {
+                // After the maximum clicks, allow the "No" button to move when hovered over
+                document.getElementById('message').textContent = "I can’t take No for an answer! Will you accept?";
+                noButtonMoving = true; // Allow the "No" button to move now
+            }
+        }
+
+        // Function to start moving the "No" button when the cursor enters
+        function startMovingNoButton() {
+            if (noButtonMoving) {
+                moveNoButton(); // Start moving the "No" button only if it should move
+            }
+        }
+
+        // Function to stop moving the "No" button when the cursor leaves
+        function stopMovingNoButton() {
+            noButtonMoving = false; // Stop the movement when the cursor leaves
+        }
+
+        // Function to actually move the "No" button randomly
+        function moveNoButton() {
+            if (!noButtonMoving) return; // If we are not supposed to move, exit the function
+
+            // Generate a random position for X and Y (within 10% to 90% of the screen)
+            let randomX = Math.random() * 80 + 10; // 10% to 90% of the width
+            let randomY = Math.random() * 80 + 10; // 10% to 90% of the height
+
+            // Set the new position of the "No" button
+            noButton.style.left = randomX + "%";
+            noButton.style.top = randomY + "%";
+
+            // Keep moving the "No" button every 500ms while the cursor is over it
+            setTimeout(() => moveNoButton(), 500);
+        }
+
+        createProposal(); // Call the function to create the proposal on page load
+    </script>
+
+</body>
+</html>

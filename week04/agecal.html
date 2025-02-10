@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator</title>
+</head>
+<body>
+    <h1>Age Calculator</h1>
+
+    <label for="dob">Enter your Date of Birth:</label>
+    <input type="date" id="dob">
+    <button onclick="calculateAge()">Calculate Age</button>
+
+    <h2>Your Age: <span id="ageYears"></span> years, <span id="ageMonths"></span> months, <span id="ageDays"></span> days</h2>
+
+    <script>
+        function calculateAge() {
+            var dob = document.getElementById("dob").value;
+            if (!dob) {
+                alert("Please select a date of birth.");
+                return;
+            }
+            
+            // Convert the date to an ISO string
+            var birthDate = new Date(dob).toISOString();
+            var today = new Date().toISOString();
+
+            // Create Date objects from ISO strings
+            var birthDateObj = new Date(birthDate);
+            var todayObj = new Date(today);
+
+            // Calculate the difference in years, months, and days
+            var ageYears = todayObj.getFullYear() - birthDateObj.getFullYear();
+            var ageMonths = todayObj.getMonth() - birthDateObj.getMonth();
+            var ageDays = Math.floor((todayObj - birthDateObj) / (1000 * 60 * 60 * 24));
+
+            // Adjust for months and years
+            if (ageMonths < 0 || (ageMonths === 0 && todayObj.getDate() < birthDateObj.getDate())) {
+                ageYears--;
+                ageMonths = 12 - Math.abs(ageMonths);
+            }
+
+            // Adjust for days
+            if (todayObj.getDate() < birthDateObj.getDate()) {
+                var previousMonth = new Date(todayObj.getFullYear(), todayObj.getMonth() - 1, 1);
+                var lastDayPreviousMonth = new Date(previousMonth.getFullYear(), previousMonth.getMonth() + 1, 0);
+                ageDays = (lastDayPreviousMonth.getDate() - birthDateObj.getDate()) + todayObj.getDate();
+            }
+
+            // Display the calculated age
+            document.getElementById("ageYears").textContent = ageYears;
+            document.getElementById("ageMonths").textContent = ageMonths;
+            document.getElementById("ageDays").textContent = ageDays;
+        }
+    </script>
+</body>
+</html>

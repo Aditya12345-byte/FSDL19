@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+        .form-container {
+            width: 300px;
+            margin: 100px auto;
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-container h2 {
+            text-align: center;
+            color: #333;
+        }
+        .form-container label {
+            font-weight: bold;
+            margin-top: 10px;
+            display: block;
+        }
+        .form-container input {
+            width: 100%;
+            padding: 8px;
+            margin: 8px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .form-container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+        .success-message {
+            color: green;
+            font-size: 16px;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h2>Registration Form</h2>
+        <form id="registrationForm">
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" required>
+            <div id="usernameError" class="error"></div>
+
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" required>
+            <div id="emailError" class="error"></div>
+
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password" required>
+            <div id="passwordError" class="error"></div>
+
+            <label for="confirmPassword">Confirm Password</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" required>
+            <div id="confirmPasswordError" class="error"></div>
+
+            <button type="submit">Register</button>
+        </form>
+        
+        <div id="successMessage" class="success-message"></div>
+    </div>
+
+    <script>
+        document.getElementById('registrationForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent form from submitting
+
+            let isValid = true;
+
+            // Clear previous error messages and success message
+            document.getElementById('usernameError').textContent = '';
+            document.getElementById('emailError').textContent = '';
+            document.getElementById('passwordError').textContent = '';
+            document.getElementById('confirmPasswordError').textContent = '';
+            document.getElementById('successMessage').textContent = '';
+
+            // Validate Username
+            const username = document.getElementById('username').value;
+            if (username.trim() === '') {
+                document.getElementById('usernameError').textContent = 'Username is required.';
+                isValid = false;
+            }
+
+            // Validate Email
+            const email = document.getElementById('email').value;
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!emailPattern.test(email)) {
+                document.getElementById('emailError').textContent = 'Please enter a valid email.';
+                isValid = false;
+            }
+
+            // Validate Password
+            const password = document.getElementById('password').value;
+            if (password.length < 6) {
+                document.getElementById('passwordError').textContent = 'Password must be at least 6 characters long.';
+                isValid = false;
+            }
+
+            // Validate Confirm Password
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            if (confirmPassword !== password) {
+                document.getElementById('confirmPasswordError').textContent = 'Passwords do not match.';
+                isValid = false;
+            }
+
+            // If form is valid, display success message
+            if (isValid) {
+                document.getElementById('successMessage').textContent = 'Successfully registered!';
+                // Optionally: You can submit the form or process the data here
+                // this.submit(); // Uncomment this if you want to submit the form
+            }
+        });
+    </script>
+</body>
+</html>
